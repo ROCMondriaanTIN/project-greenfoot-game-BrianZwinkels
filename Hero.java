@@ -36,17 +36,24 @@ public class Hero extends Mover {
                 break;
             }
         }
+    }  
+    boolean onGround(){
+        Actor under = getOneObjectAtOffset(0, getImage().getHeight()/2, Tile.class);
+        return under != null;
     }
 
+
+
     public void handleInput() {
-        if (Greenfoot.isKeyDown("w")) {
-            velocityY = -20;
+        if (Greenfoot.isKeyDown("w")&&(onGround() == true)) {
+            velocityY = -12
+          ;
         }
 
         if (Greenfoot.isKeyDown("a")) {
-            velocityX = -2;
+            velocityX = -7;
         } else if (Greenfoot.isKeyDown("d")) {
-            velocityX = 2;
+            velocityX = 7;
         }
     }
 
