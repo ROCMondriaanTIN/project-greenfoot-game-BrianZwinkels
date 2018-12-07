@@ -1,4 +1,3 @@
-
 import greenfoot.*;
 
 /**
@@ -35,6 +34,10 @@ public class Hero extends Mover {
                 getWorld().removeObject(this);
                 break;
             }
+        }
+        if(Greenfoot.isKeyDown("l")){
+            System.out.println(getX() + " " + getY());
+            Greenfoot.delay(10);
         }
     }  
     boolean onGround(){

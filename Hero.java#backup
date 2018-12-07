@@ -1,0 +1,160 @@
+
+import greenfoot.*;
+
+/**
+ *
+ * @author R. Springer
+ */
+public class Hero extends Mover {
+
+    private final double gravity;
+    private final double acc;
+    private final double drag;
+    
+    private GreenfootImage ren1r = new GreenfootImage("p1_walk01.png");
+    private GreenfootImage ren2r = new GreenfootImage("p1_walk02.png");
+    private GreenfootImage ren3r = new GreenfootImage("p1_walk03.png");
+    private GreenfootImage ren4r = new GreenfootImage("p1_walk04.png");
+    private GreenfootImage ren5r = new GreenfootImage("p1_walk05.png");
+    private GreenfootImage ren6r = new GreenfootImage("p1_walk06.png");
+    private GreenfootImage ren7r = new GreenfootImage("p1_walk07.png");
+    
+    
+    private GreenfootImage ren1l = new GreenfootImage("p1_walk01l.png");
+    private GreenfootImage ren2l = new GreenfootImage("p1_walk02l.png");
+    private GreenfootImage ren3l = new GreenfootImage("p1_walk03l.png");
+    private GreenfootImage ren4l = new GreenfootImage("p1_walk04l.png");
+    private GreenfootImage ren5l = new GreenfootImage("p1_walk05l.png");
+    private GreenfootImage ren6l = new GreenfootImage("p1_walk06l.png");
+    private GreenfootImage ren7l = new GreenfootImage("p1_walk07l.png");
+    private int frame = 1;
+    public Hero() {
+        super();
+        gravity = 9.8;
+        acc = 0.6;
+        drag = 0.8;
+        setImage("p1.png");
+    }
+
+    @Override
+    public void act() {
+        handleInput();
+        
+        velocityX *= drag;
+        velocityY += acc;
+        if (velocityY > gravity) {
+            velocityY = gravity;
+        }
+        applyVelocity();
+
+        for (Actor enemy : getIntersectingObjects(Enemy.class)) {
+            if (enemy != null) {
+                getWorld().removeObject(this);
+                break;
+            }
+        }
+    }  
+    boolean onGround(){
+        Actor under = getOneObjectAtOffset(0, getImage().getHeight()/2, Tile.class);
+        return under != null;
+    }
+
+
+
+    public void handleInput() {
+        if (Greenfoot.isKeyDown("w")&&(onGround() == true)) {
+            velocityY = -12;
+            if (frame == 1)
+            {
+                setImage (
+        }
+
+        if (Greenfoot.isKeyDown("a")) {
+            velocityX = -7;
+            animateLeft ();
+        } else if (Greenfoot.isKeyDown("d")) {
+            velocityX = 7;
+            animateRight ();
+        }
+    }
+
+    public void animateRight()
+    {
+        if (frame == 1)
+        {
+            setImage(ren1r);
+        }
+        else if(frame == 2)
+        {
+            setImage(ren2r);
+        }
+        else if(frame == 3)
+        {
+            setImage(ren3r);
+        }
+        else if(frame == 4)
+        {
+            setImage(ren4r);
+        }
+        else if(frame == 5)
+        {
+            setImage(ren5r);
+        }
+        else if(frame == 6)
+        {
+            setImage(ren6r);
+        }
+        else if(frame == 7)
+        {
+            setImage(ren7r);
+            frame = 1;
+            return;
+        }
+        
+        frame ++;
+    }
+    
+    public void animateLeft()
+    {
+        if (frame == 1)
+        {
+            setImage(ren1l);
+        }
+        else if(frame == 2)
+        {
+            setImage(ren2l);
+        }
+        else if(frame == 3)
+        {
+            setImage(ren3l);
+        }
+        else if(frame == 4)
+        {
+            setImage(ren4l);
+        }
+        else if(frame == 5)
+        {
+            setImage(ren5l);
+        }
+        else if(frame == 6)
+        {
+            setImage(ren6l);
+        }
+        else if(frame == 7)
+        {
+            setImage(ren7l);
+            frame = 1;
+            return;
+        }
+        
+        frame ++;
+    }
+    
+    public int getWidth() {
+        return getImage().getWidth();
+    }
+
+    public int getHeight() {
+        return getImage().getHeight();
+    }
+}
